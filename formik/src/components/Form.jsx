@@ -1,6 +1,11 @@
 
+
+import {useFormik} from 'formik'
+
 function Form()
 {
+    const formik=useFormik({})
+    console.log(formik)
     return(
         <>
            <form>
@@ -21,3 +26,12 @@ function Form()
 }
 
 export default Form
+
+
+// Formik will take an object with some value as gievn below----->
+
+// useFormik({ validateOnChange, validateOnBlur, validateOnMount, isInitialValid, enableReinitialize, onSubmit, ...rest }: FormikConfig<FormikValues>)
+
+// useFormik with empty object return this ---->
+
+// {values: undefined, errors: {…}, touched: {…}, status: undefined, isSubmitting: false, …}
