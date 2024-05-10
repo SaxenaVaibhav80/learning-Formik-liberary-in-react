@@ -10,12 +10,16 @@ function Form()
             name:'',
             email:'',
             channel :''
-        }
+        },
+        onSubmit: values=>
+            {
+                console.log(values)//on submit the form the data or values will be stored by or return by onSubmit which can be extract by call back fun
+            }
     })
     console.log(formik.values)// you can access those object passed in the useFormik by writing formik.values
     return(
         <>
-           <form>
+           <form onSubmit={formik.handleSubmit}>
               <label htmlFor="myName">Name</label>
               <input name="name" id="myName" type="text" onChange={formik.handleChange} value={formik.values.name}/>
 
@@ -25,7 +29,7 @@ function Form()
               <label htmlFor="myCh">Channel</label>
               <input name="channel" id="myCh" type="text"onChange={formik.handleChange} value={formik.values.channel}/>
 
-              <button>Submit</button>
+              <button type="submit">Submit</button>
            </form>
         
         </>
