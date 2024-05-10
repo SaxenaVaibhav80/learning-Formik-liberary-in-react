@@ -1,7 +1,6 @@
 
 import {useFormik} from 'formik'
 
-
 function Form()
 {
     const formik=useFormik({
@@ -14,22 +13,54 @@ function Form()
         onSubmit: values=>
             {
                 console.log(values)//on submit the form the data or values will be stored by or return by onSubmit which can be extract by call back fun
+            },
+        validate:values=>
+            {
+                let error={}
+                
+                 if(!values.name)
+                    {
+                        error.name="Name field is required"
+                    }
+                if(!values.email)
+                    {
+                        error.email="Email is required"
+                    }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/.test(values.email)){
+                        error.email="Invalid mail"
+                    }  
+                if(!values.channel)
+                    {
+                        error.channel="channel is required"
+                    }         
+
+                return error
             }
     })
     console.log(formik.values)// you can access those object passed in the useFormik by writing formik.values
+    console.log(formik.errors)
     return(
         <>
            <form onSubmit={formik.handleSubmit}>
-              <label htmlFor="myName">Name</label>
-              <input name="name" id="myName" type="text" onChange={formik.handleChange} value={formik.values.name}/>
 
-              <label htmlFor="myEmail">E-mail</label>
-              <input name="email" id="myEmail" type="email" onChange={formik.handleChange} value={formik.values.email}/>
+               <div className='form-control'>
+                 <label htmlFor="myName">Name</label>
+                 <input name="name" id="myName" type="text" onChange={formik.handleChange} value={formik.values.name}/>
+                 {formik.errors.name?  <div className='error'>{formik.errors.name}</div>:null}
+               </div>
+   
+               <div className='form-control'>
+                 <label htmlFor="myEmail">E-mail</label>
+                 <input name="email" id="myEmail" type="email" onChange={formik.handleChange} value={formik.values.email}/>
+                 {formik.errors.email?  <div className='error'>{formik.errors.email}</div>:null}
+               </div>
+               
+               <div className='form-control'>
+                 <label htmlFor="myCh">Channel</label>
+                 <input name="channel" id="myCh" type="text"onChange={formik.handleChange} value={formik.values.channel}/>
+                 {formik.errors.channel?  <div className='error'>{formik.errors.channel}</div>:null}
+               </div>
 
-              <label htmlFor="myCh">Channel</label>
-              <input name="channel" id="myCh" type="text"onChange={formik.handleChange} value={formik.values.channel}/>
-
-              <button type="submit">Submit</button>
+               <button type="submit">Submit</button>
            </form>
         
         </>
