@@ -37,27 +37,27 @@ function Form()
             }
     })
     console.log(formik.values)// you can access those object passed in the useFormik by writing formik.values
-    console.log(formik.errors)
+    console.log('visited',formik.touched) // it will give you object with name of the input field as key and value as visited or " "
     return(
         <>
            <form onSubmit={formik.handleSubmit}>
 
                <div className='form-control'>
                  <label htmlFor="myName">Name</label>
-                 <input name="name" id="myName" type="text" onChange={formik.handleChange} value={formik.values.name}/>
-                 {formik.errors.name?  <div className='error'>{formik.errors.name}</div>:null}
+                 <input name="name" id="myName" type="text" onChange={formik.handleChange} value={formik.values.name} onBlur={formik.handleBlur}/>
+                 {formik.touched.name && formik.errors.name?  <div className='error'>{formik.errors.name}</div>:null}
                </div>
    
                <div className='form-control'>
                  <label htmlFor="myEmail">E-mail</label>
-                 <input name="email" id="myEmail" type="email" onChange={formik.handleChange} value={formik.values.email}/>
-                 {formik.errors.email?  <div className='error'>{formik.errors.email}</div>:null}
+                 <input name="email" id="myEmail" type="email" onChange={formik.handleChange} value={formik.values.email}onBlur={formik.handleBlur}/>
+                 {formik.touched.email && formik.errors.email?  <div className='error'>{formik.errors.email}</div>:null}
                </div>
                
                <div className='form-control'>
                  <label htmlFor="myCh">Channel</label>
-                 <input name="channel" id="myCh" type="text"onChange={formik.handleChange} value={formik.values.channel}/>
-                 {formik.errors.channel?  <div className='error'>{formik.errors.channel}</div>:null}
+                 <input name="channel" id="myCh" type="text"onChange={formik.handleChange} value={formik.values.channel} onBlur={formik.handleBlur}/>
+                 {formik.touched.channel && formik.errors.channel?  <div className='error'>{formik.errors.channel}</div>:null}
                </div>
 
                <button type="submit">Submit</button>
