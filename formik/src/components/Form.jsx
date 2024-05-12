@@ -2,6 +2,14 @@
 import {useFormik} from 'formik'
 import *as yup from 'yup'
 
+
+
+const validateSchema=yup.object({
+    name:yup.string.required('Required'),
+    email:yup.string()
+    .email('Invalid Email Format')
+    .required('require')
+})
 function Form()
 {
     const formik=useFormik({
