@@ -8,7 +8,8 @@ const validateSchema=yup.object({
     name:yup.string.required('Required'),
     email:yup.string()
     .email('Invalid Email Format')
-    .required('require')
+    .required('require'),
+    channel:yup.required('require')
 })
 function Form()
 {
